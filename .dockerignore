@@ -1,0 +1,15 @@
+**
+!Dockerfile
+!requirements.txt
+!app/
+app/**
+!app/*.py
+!static/
+static/**
+!static/*.js
+!static/*.css
+!static/*.html
+!static/icons/
+static/icons/**
+!static/icons/*.svg
+!static/icons/LICENSE

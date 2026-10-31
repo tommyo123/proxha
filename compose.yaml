@@ -1,0 +1,24 @@
+services:
+  proxha:
+    image: ghcr.io/tommyo123/proxha:${PROXHA_IMAGE_TAG:-latest}
+    pull_policy: always
+    ports:
+      - "${PROXHA_BIND_ADDRESS:-0.0.0.0}:${PROXHA_HTTPS_PORT:-8080}:8080"
+      - "${PROXHA_BIND_ADDRESS:-0.0.0.0}:${PROXHA_HTTP_PORT:-8081}:8081"
+    environment:
+      PROXHA_PROTOCOL: ${PROXHA_PROTOCOL:-https}
+      PROXHA_TLS_CERT_FILE: ${PROXHA_TLS_CERT_FILE:-}
+      PROXHA_TLS_KEY_FILE: ${PROXHA_TLS_KEY_FILE:-}
+      PROXHA_PUBLIC_HOST: ${PROXHA_PUBLIC_HOST:-}
+      PROXHA_ALLOWED_HOSTS: ${PROXHA_ALLOWED_HOSTS:-}
+    volumes:
+      - proxha-config:/config
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    restart: unless-stopped
+    stop_grace_period: 60s
+volumes:
+  proxha-config:

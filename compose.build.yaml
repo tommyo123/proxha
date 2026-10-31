@@ -1,0 +1,5 @@
+services:
+  proxha:
+    image: proxha:local
+    pull_policy: build
+    build: .
